@@ -3,7 +3,6 @@
 from models.base_model import BaseModel, Base
 from sqlalchemy import Column, String
 from sqlalchemy.orm import relationship
-from models import storage
 
 
 class State(BaseModel, Base):
@@ -15,9 +14,13 @@ class State(BaseModel, Base):
     @property
     def cities(self):
         """Gets the cities attribute"""
+        from models import storage
+
         dict_city = storage.all(City)
-        ouput = []
-        for city in dict_city:
+        output = []
+
+        for key in dict_city:
+            city = dict_city[key]
             if self.id == city.state_id:
                 output.append(city)
         return output
