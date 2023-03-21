@@ -9,4 +9,4 @@ class City(BaseModel, Base):
     __tablename__ = 'cities'
     state_id = Column(String(60), ForeignKey('states.id'))
     name = Column(String(128), nullable=False)
-    places = relationship('Place', back_populates='cities')
+    places = relationship('Place', backpopulates='cities')
