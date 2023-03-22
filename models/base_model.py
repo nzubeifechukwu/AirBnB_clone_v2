@@ -5,7 +5,14 @@ from datetime import datetime
 from sqlalchemy import Column, String, DateTime
 from sqlalchemy.ext.declarative import declarative_base
 
-Base = declarative_base()
+
+class Charset:
+    """set charset for all tables"""
+    __table_args__ = {
+        "mysql_default_charset": "latin1"        
+    }
+
+Base = declarative_base(cls=Charset)
 
 
 class BaseModel:
@@ -17,7 +24,6 @@ class BaseModel:
     def __init__(self, *args, **kwargs):
         """Instatntiates a new model"""
         if not kwargs:
-            from models import storage
             self.id = str(uuid.uuid4())
             self.created_at = datetime.now()
             self.updated_at = datetime.now()
@@ -31,7 +37,6 @@ class BaseModel:
                 kwargs['updated_at'] = datetime.strptime(
                         upd_at, '%Y-%m-%dT%H:%M:%S.%f')
             else:
-                from models import storage
                 self.id = str(uuid.uuid4())
                 self.created_at = datetime.now()
                 self.updated_at = datetime.now()
