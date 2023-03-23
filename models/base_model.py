@@ -6,13 +6,7 @@ from sqlalchemy import Column, String, DateTime
 from sqlalchemy.ext.declarative import declarative_base
 
 
-class Charset:
-    """set charset for all tables"""
-    __table_args__ = {
-        "mysql_default_charset": "latin1"        
-    }
-
-Base = declarative_base(cls=Charset)
+Base = declarative_base()
 
 
 class BaseModel:
