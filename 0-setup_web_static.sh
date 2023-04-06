@@ -14,7 +14,7 @@ mkdir -p /data/web_static/releases/test/
 touch /data/web_static/releases/test/index.html
 
 # Populate `index.html`
-echo -e "<html>\n  <head></head>\n  <body>\n    Holberton School</body></html>" > /data/web_static/releases/test/index.html
+echo -e "<html>\n  <head>\n  </head>\n  <body>\n    Holberton School\n  </body>\n</html>" > /data/web_static/releases/test/index.html
 
 # Create a symbolic link. If the link already exists,
 # it should be deleted and recreated
