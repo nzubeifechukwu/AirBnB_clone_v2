@@ -2,8 +2,8 @@
 # Set up my web servers for the deployment of `web_static`
 
 # Install Nginx (if it's not already installed)
-# sudo apt-get -y update
-# sudo apt-get -y install nginx
+sudo apt-get -y update
+sudo apt-get -y install nginx
 
 # Create necessary folders and files
 mkdir -p /data/
