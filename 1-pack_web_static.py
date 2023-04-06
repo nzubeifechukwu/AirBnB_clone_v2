@@ -4,6 +4,7 @@
 '''
 from fabric.api import local
 from datetime import datetime
+import os.path
 
 
 def do_pack():
@@ -13,5 +14,11 @@ def do_pack():
         Path to the archive if successful. None otherwise
     '''
     now = datetime.now().strftime('%Y%m%d%H%M%S')
+    file_path = f'versions/web_static_{now}.tgz'
+
     local('mkdir -p versions')
-    local(f'tar -cvzf versions/web_static_{now}.tgz web_static')
+    local(f'tar -cvzf {file_path} web_static')
+
+    if os.path.exists(file_path):
+        return file_path
+    return None
