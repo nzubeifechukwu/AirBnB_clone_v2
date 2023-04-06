@@ -14,10 +14,10 @@ def do_pack():
         Path to the archive if successful. None otherwise
     '''
     now = datetime.now().strftime('%Y%m%d%H%M%S')
-    file_path = f'versions/web_static_{now}.tgz'
+    file_path = 'versions/web_static_{}.tgz'.format(now)
 
     local('mkdir -p versions')
-    local(f'tar -cvzf {file_path} web_static')
+    local('tar -cvzf {} web_static'.format(file_path))
 
     if os.path.exists(file_path):
         return file_path
