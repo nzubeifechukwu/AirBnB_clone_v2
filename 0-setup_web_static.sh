@@ -26,7 +26,7 @@ sudo chown -R ubuntu:ubuntu /data/
 # Update the Nginx configuration to serve the content of
 # /data/web_static/current/ to hbnb_static
 # (ex: https://mydomainname.tech/hbnb_static)
-repl_str="error_page 404 \/error.html;\n\n\tlocation \/hbnb_static\/ {\n\t\talias \/data\/web_static\/current\/;\n\t}"
+repl_str="error_page 404 \/error.html;\n\n\tlocation \/hbnb_static {\n\t\talias \/data\/web_static\/current\/;\n\t}"
 sudo sed -i "s/error_page 404 \/error.html;/$repl_str/" /etc/nginx/sites-available/default
 
 sudo service nginx restart
