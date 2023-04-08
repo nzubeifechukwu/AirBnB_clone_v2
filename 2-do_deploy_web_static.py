@@ -22,6 +22,8 @@ def do_deploy(archive_path):
         run('mkdir -p {}'.format(uncomp_folder))
         run('tar -xzf /tmp/{}.tgz -C {}'.format(file_no_ext, uncomp_folder))
         run('rm /tmp/{}.tgz'.format(file_no_ext))
+        run('mv {}/web_static/* {}'.format(uncomp_folder, uncomp_folder))
+        run('rm -rf {}/web_static'.format(uncomp_folder))
         run('rm -rf /data/web_static/current')
         run('ln -s {} /data/web_static/current'.format(uncomp_folder))
         return True
