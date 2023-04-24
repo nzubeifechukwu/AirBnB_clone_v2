@@ -12,6 +12,7 @@ from models.state import State
 from models.review import Review
 import os
 
+
 class DBStorage:
     """Database storage class using mysqldb and sqlalchemy"""
     __engine = None
@@ -25,9 +26,9 @@ class DBStorage:
         HBNB_MYSQL_DB = os.environ.get('HBNB_MYSQL_DB')
         HBNB_ENV = os.environ.get('HBNB_ENV')
 
-        self.__engine = create_engine(f"""mysql+mysqldb://{HBNB_MYSQL_USER}:{
-                HBNB_MYSQL_PWD}@{HBNB_MYSQL_HOST}/{
-                HBNB_MYSQL_DB}""", pool_pre_ping=True)
+        self.__engine = create_engine("mysql+mysqldb://{}:{}@{}/{}".format(
+            HBNB_MYSQL_USER, HBNB_MYSQL_PWD, HBNB_MYSQL_HOST, HBNB_MYSQL_DB),
+            pool_pre_ping=True)
 
         if HBNB_ENV == 'test':
             Base.metadata.drop_all(self.__engine)
@@ -44,12 +45,12 @@ class DBStorage:
             for cls in models:
                 for objs in self.__session.query(cls).all():
                     obj = objs.to_dict()
-                    key = f"{obj['__class__']}.{obj['id']}"
+                    key = "{}.{}".format(obj['__class__'], obj['id'])
                     obj_dict[key] = objs
         else:
             for objs in self.__session.query(cls).all():
                 obj = objs.to_dict()
-                key = f"{obj['__class__']}.{obj['id']}"
+                key = "{}.{}".format(obj['__class__'], obj['id'])
                 obj_dict[key] = objs
         return obj_dict
 
